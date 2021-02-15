@@ -7,6 +7,8 @@ import (
 	"sort"
 )
 
+var messages []string
+
 // TODO: Cache
 func renderUsers() {
 	users := []string{
@@ -62,15 +64,18 @@ func renderUsers() {
 }
 
 func prompt() {
-	//var messages []string
 	setCursorPosition(0, termHeight)
 	fmt.Print(fgColor(FG_RED, " \u25BA "))
 	r := bufio.NewReader(os.Stdin)
 	text, _ := r.ReadString('\n')
+	eraseCurrentLine()
 	text = processEmojis(string(text))
 	text = fmt.Sprintf("%s: %s", fgColor(FG_GREEN, "Yuna"), text)
-	//messages = append(messages, text)
-
-	setCursorPosition(0, termHeight-1) // here broken
-	fmt.Printf(text)
+	messages = append(messages, text)
+	j := 0
+	for i := len(messages) - 1; i >= 0; i-- {
+		setCursorPosition(0, termHeight-i)
+		fmt.Print(messages[j])
+		j++
+	}
 }

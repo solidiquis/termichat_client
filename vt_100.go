@@ -7,20 +7,22 @@ import (
 const (
 	CURSOR_POSITION_TEMPLATE = "\x1B[%d;%df"
 	CURSOR_DOWN_TEMPLATE     = "\x1B[%dB"
-	FG_COLOR_TEMPLATE        = "\x1B[%dm%s\x1B[0m"
+	CURSOR_HOME              = "\x1B[H"
+
+	ERASE_CURRENT_LINE = "\x1B[1J"
 
 	CLEAR_SCREEN = "\x1B[2J"
 	RESET_ATTRS  = "\x1B[m"
-	CURSOR_HOME  = "\x1B[H"
 
-	FG_BLACK   = 30
-	FG_RED     = 31
-	FG_GREEN   = 32
-	FG_YELLOW  = 33
-	FG_BLUE    = 34
-	FG_MAGENTA = 35
-	FG_CYAN    = 36
-	FG_WHITE   = 37
+	FG_COLOR_TEMPLATE = "\x1B[%dm%s\x1B[0m"
+	FG_BLACK          = 30
+	FG_RED            = 31
+	FG_GREEN          = 32
+	FG_YELLOW         = 33
+	FG_BLUE           = 34
+	FG_MAGENTA        = 35
+	FG_CYAN           = 36
+	FG_WHITE          = 37
 )
 
 func fgColor(color int, text string) string {
@@ -51,4 +53,8 @@ func resetAttributes() {
 
 func cursorHome() {
 	fmt.Println(CURSOR_HOME)
+}
+
+func eraseCurrentLine() {
+	fmt.Print(ERASE_CURRENT_LINE)
 }
