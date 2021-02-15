@@ -67,8 +67,10 @@ func prompt() {
 	fmt.Print(fgColor(FG_RED, " \u25BA "))
 	r := bufio.NewReader(os.Stdin)
 	text, _ := r.ReadString('\n')
-	text = fmt.Sprintf("%s: %s", fgColor(FG_GREEN, "Yuna"), string(text))
+	text = processEmojis(string(text))
+	text = fmt.Sprintf("%s: %s", fgColor(FG_GREEN, "Yuna"), text)
 	//messages = append(messages, text)
-	setCursorPosition(0, termHeight-1)
-	fmt.Print(text)
+
+	setCursorPosition(0, termHeight-1) // here broken
+	fmt.Printf(text)
 }
