@@ -1,4 +1,4 @@
-package main
+package ui
 
 import (
 	"regexp"
@@ -13,9 +13,8 @@ var emojisMap = make(map[string]string)
 
 func init() {
 	emojisMap = map[string]string{
-		"angry":       "\U0001f620",
-		"smile":       "\U0001f604",
-		"sweat_smile": "\\U1F605",
+		"angry": "\U0001f620",
+		"smile": "\U0001f604",
 	}
 }
 

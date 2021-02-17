@@ -1,4 +1,4 @@
-package main
+package terminal
 
 import (
 	"fmt"
@@ -25,7 +25,7 @@ const (
 	FG_WHITE          = 37
 )
 
-func fgColor(color int, text string) string {
+func FgColor(color int, text string) string {
 	if color < 30 || color > 37 {
 		color = FG_WHITE
 	}
@@ -33,28 +33,28 @@ func fgColor(color int, text string) string {
 	return fmt.Sprintf(FG_COLOR_TEMPLATE, color, text)
 }
 
-func setCursorPosition(x, y int) {
+func SetCursorPosition(x, y int) {
 	fmt.Printf(
 		fmt.Sprintf(CURSOR_POSITION_TEMPLATE, y, x),
 	)
 }
 
-func cursorDown(y int) {
+func CursorDown(y int) {
 	fmt.Printf(CURSOR_DOWN_TEMPLATE, y)
 }
 
-func clearScreen() {
+func ClearScreen() {
 	fmt.Print(CLEAR_SCREEN)
 }
 
-func resetAttributes() {
+func ResetAttributes() {
 	fmt.Println(RESET_ATTRS)
 }
 
-func cursorHome() {
+func CursorHome() {
 	fmt.Println(CURSOR_HOME)
 }
 
-func eraseCurrentLine() {
+func EraseCurrentLine() {
 	fmt.Print(ERASE_CURRENT_LINE)
 }

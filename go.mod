@@ -1,5 +1,5 @@
-module github.com/solidiquis/termui_client
+module github.com/solidiquis/termichat_client
 
 go 1.13
 
-require golang.org/x/sys v0.0.0-20210124154548-22da62e12c0c
+require golang.org/x/sys v0.0.0-20210216224549-f992740a1bac

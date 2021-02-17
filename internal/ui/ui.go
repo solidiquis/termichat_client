@@ -1,16 +1,18 @@
-package main
+package ui
 
 import (
 	"bufio"
 	"fmt"
 	"os"
 	"sort"
+
+	win "github.com/solidiquis/termichat_client/internal/terminal"
 )
 
 var messages []string
 
 // TODO: Cache
-func renderUsers() {
+func RenderUsers(termWidth int) {
 	users := []string{
 		"Yuna",
 		"Tidus",
@@ -40,7 +42,7 @@ func renderUsers() {
 		var status string
 
 		if i%2 == 0 {
-			status = fgColor(FG_CYAN, "\u25CF")
+			status = win.FgColor(win.FG_CYAN, "\u25CF")
 		} else {
 			status = "\u25CB"
 		}
@@ -52,29 +54,29 @@ func renderUsers() {
 	offsetX := termWidth - maxLength - 4
 	offsetY := 1
 
-	setCursorPosition(offsetX, 0)
+	win.SetCursorPosition(offsetX, 0)
 
 	for _, user := range users {
 		fmt.Print(user)
 		offsetY++
 
-		setCursorPosition(offsetX, offsetY)
+		win.SetCursorPosition(offsetX, offsetY)
 	}
 	fmt.Println()
 }
 
-func prompt() {
-	setCursorPosition(0, termHeight)
-	fmt.Print(fgColor(FG_RED, " \u25BA "))
+func Prompt(termHeight int) {
+	win.SetCursorPosition(0, termHeight)
+	fmt.Print(win.FgColor(win.FG_RED, " \u25BA "))
 	r := bufio.NewReader(os.Stdin)
 	text, _ := r.ReadString('\n')
-	eraseCurrentLine()
+	win.EraseCurrentLine()
 	text = processEmojis(string(text))
-	text = fmt.Sprintf("%s: %s", fgColor(FG_GREEN, "Yuna"), text)
+	text = fmt.Sprintf("%s: %s", win.FgColor(win.FG_GREEN, "Yuna"), text)
 	messages = append(messages, text)
 	j := 0
 	for i := len(messages) - 1; i >= 0; i-- {
-		setCursorPosition(0, termHeight-i)
+		win.SetCursorPosition(0, termHeight-i)
 		fmt.Print(messages[j])
 		j++
 	}
